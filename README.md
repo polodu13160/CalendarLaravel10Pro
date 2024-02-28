@@ -4,6 +4,20 @@
 
 
 
+# Initialisation 
+
+Installer les dépendances via Composer
+
+```bash
+composer install 
+```
+Mettre à jour le fichier .env pour votre serveur
+Assurez-vous de configurer correctement les variables d'environnement telles que la connexion à la base de données
+
+# Exécuter les migrations de la base de données avec les données initiales
+```bash
+php artisan migrate:fresh --seed 
+```
 
 # CalendarLaravelPro
 This project aims to develop an interactive calendar using the Laravel framework. The goal is to allow users to manage their appointments and events efficiently, with advanced features such as integration and the ability to modify through personal calendars like Google Calendar and Apple Calendar.
