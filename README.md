@@ -14,7 +14,8 @@ composer install
 Mettre à jour le fichier .env pour votre serveur
 Assurez-vous de configurer correctement les variables d'environnement telles que la connexion à la base de données
 
-# Exécuter les migrations de la base de données avec les données initiales
+Exécuter les migrations de la base de données avec les données initiales
+
 ```bash
 php artisan migrate:fresh --seed 
 ```
