@@ -12,7 +12,7 @@ class Event extends Model
 
 
     protected $fillable = [
-        'title','colour','starts_at','ends_at'
+        'title','content','colour','starts_at','ends_at'
     ];
 
     protected $casts = [

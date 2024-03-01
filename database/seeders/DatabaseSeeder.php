@@ -17,7 +17,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(EventSeeder::class);
         $this->call(RoleSeeder::class);
+
 
         $respRole=Role::firstWhere('name',RoleEnum::RESP_GROUP->value);
 
@@ -36,7 +38,7 @@ class DatabaseSeeder extends Seeder
             );
 
         \App\Models\User::factory()->create([
-            'name' => 'Admin',
+            'name' => 'Aaadmin',
             'email' => 'admin@test.com',
         ])
             ->assignRole(Role::firstWhere('name',RoleEnum::ADMIN->value));
