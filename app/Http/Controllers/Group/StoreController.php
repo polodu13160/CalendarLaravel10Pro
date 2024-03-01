@@ -6,37 +6,51 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Group\StoreRequest;
 use App\Models\AssoGroupUser;
 use App\Models\Group;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     */
+
     public function __invoke(StoreRequest $request)
     {
-        dd($request);
-        $post=$request->validated();
-        if($post["group"]=="Non") {
-            Group::create(['name' => $post["createGroup"]]);
+        $request->groupExists();
+        $post = $request->validated();
+
+
+        $messagesFlash = [];
+//
+
+//        if(Group::where('name',$this->input('createGroup'))->get()->toArray()==!null)
+
+        if ($post["group"] == "Non") {
+            $nameGroup = $post["createGroup"];
+            $group = Group::create(['name' => $nameGroup]);
+            $messagesFlash[] = "Vous avez créé le groupe $nameGroup";
+
+        } else {
+            $nameGroup = $post["group"];
+            $group = Group::where("name", '=', $nameGroup)->first();
         }
 
         foreach ($post["users_id"] as $userId){
 
-            AssoGroupUser::create([
-                'user_id'=>$post['users_id'],
-                'group_id'=>Group::find('group_id',$post["createGroup"])
-            ]);
+            $user = User::find($userId);
+
+            if (AssoGroupUser::select()
+                    ->where("user_id", $userId)
+                    ->where("group_id", $group->id)
+                    ->first() == null
+            ) {
+
+                AssoGroupUser::create([
+                    'user_id' => $userId,
+                    'group_id' => $group->id,
+                    'Resp_Group'=>false
+                ]);
+
+            } else $messagesFlash[] = "$user->name est deja dans ce groupe";
         }
-
-
-
-
-
-
-
-
-
 
     }
 

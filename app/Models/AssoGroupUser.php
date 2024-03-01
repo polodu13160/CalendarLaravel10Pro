@@ -14,9 +14,17 @@ class AssoGroupUser extends Model
     protected $table='asso_groups_users';
     use HasFactory;
 
+    protected $fillable=[
+        'user_id',
+        'group_id',
+        'Resp_Group'
+    ];
+
 
     protected $casts=[
-        'Resp_Group'=>'boolean'
+        'Resp_Group'=>'boolean',
+        'user_id'=>'integer',
+        'group_id'=>'integer'
     ];
 
     public function groups(): BelongsToMany

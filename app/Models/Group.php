@@ -11,6 +11,10 @@ class Group extends Model
     protected $table='groups';
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+    ];
+
     protected $casts = [
         'name' => 'string',
         'description'=>'string',

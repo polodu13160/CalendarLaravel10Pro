@@ -4,6 +4,7 @@ namespace App\Http\Requests\Group;
 
 use App\Models\Group;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\Validator;
 
 class StoreRequest extends FormRequest
@@ -51,5 +52,17 @@ class StoreRequest extends FormRequest
         if ($this->input('group') === 'Non') {
             return ['required'];
         } else return ['nullable'];
+    }
+    public function groupExists(): RedirectResponse|null
+    {
+        $groupName = $this->input('createGroup');
+
+        $groupExists = Group::where('name', $groupName)->exists();
+
+        if ($groupExists) {
+            return back()->withErrors(['createGroup' => 'Le nom du groupe existe déjà.']);
+        }
+        return null;
+
     }
 }
