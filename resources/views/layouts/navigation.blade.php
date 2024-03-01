@@ -15,9 +15,12 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @can('group.create')
                     <x-nav-link :href="route('group.create')" :active="request()->routeIs('group.create')">
+
                         {{ __('Créer Groupe') }}
                     </x-nav-link>
+                    @endcan
                 </div>
             </div>
 

@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('group')
         ->as('group.')
+        ->middleware('can: group')
         ->group(static function ():void{
             route::get('/create',\App\Http\Controllers\Group\CreateController::class)->name('create');
             route::post('/',\App\Http\Controllers\Group\StoreController::class)->name('store');

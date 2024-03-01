@@ -3,25 +3,43 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Enum\RoleEnum;
 use App\Models\Group;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
+
     /**
      * Seed the application's database.
      */
     public function run(): void
     {
-//         \App\Models\User::factory(10)->create();
+        $this->call(RoleSeeder::class);
+
+        $respRole=Role::firstWhere('name',RoleEnum::RESP_GROUP->value);
+
+         \App\Models\User::factory(10)->create()
+             ->each(
+             fn(User $user)=>$user->assignRole($respRole)
+         );
 //        \App\Models\Group::factory(10)->create();
 
 
-         \App\Models\User::factory()->create([
-             'name' => 'Admin',
-             'email' => 'admin@test.com',
-         ]);
+         $userRole=Role::firstWhere('name',RoleEnum::USER->value);
+
+        \App\Models\User::factory(10)->create()
+            ->each(
+                fn(User $user)=>$user->assignRole($userRole)
+            );
+
+        \App\Models\User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'admin@test.com',
+        ])
+            ->assignRole(Role::firstWhere('name',RoleEnum::ADMIN->value));
 
         $groupNames=['GROUP1','GROUP2','GROUP3'];
         foreach ($groupNames as $groupName) {
@@ -34,7 +52,11 @@ class DatabaseSeeder extends Seeder
         }
 
 
-         \App\Models\AssoGroupUser::factory(10)
+
+
+
+
+         \App\Models\AssoGroupUser::factory(20)
              ->create();
     }
 }
