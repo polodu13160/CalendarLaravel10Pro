@@ -4,7 +4,10 @@ import Alpine from 'alpinejs';
 
 import { Calendar } from '@fullcalendar/core';
 
+
 import timeGridPlugin from '@fullcalendar/timegrid';
+
+import interactionPlugin from '@fullcalendar/interaction';
 
 window.Alpine = Alpine;
 
@@ -48,7 +51,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     // ]
 
     const calendar = new Calendar(calendarEl, {
-        plugins: [ timeGridPlugin ],
+        plugins: [ timeGridPlugin, interactionPlugin  ],
         initialView: 'timeGridWeek',
         slotMinTime: "08:00:00",
         slotMaxTime: "20:00:00",
@@ -56,13 +59,23 @@ document.addEventListener('DOMContentLoaded', async function() {
 
             let { data } = await axios.put(baseApi+'api/subscribe', {
                 id: info.event.id,
+
             });
 
             info.el.style.borderColor = data.attached === true ? 'green' : 'yellow';
         },
         events: data.events,
-        // events: events
+        editable:true,
+        eventDrop: async function(info) {
+            await axios.put(baseApi + 'api/events/' + info.event.id, {
+                start: info.event.start,
+                end: info.event.end
+            });
+
+        }
     });
+
+
 
     calendar.setOption('locale', 'fr');
     calendar.render();
