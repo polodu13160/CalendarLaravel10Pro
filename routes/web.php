@@ -27,17 +27,16 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::view('calendar','calendar')->name('calendar');
-
+    Route::view('calendar', 'calendar')->name('calendar');
 
     Route::prefix('group')
         ->as('group.')
         ->middleware('can: group')
-        ->group(static function ():void{
-            route::get('/create',\App\Http\Controllers\Group\CreateController::class)->name('create');
-            route::post('/',\App\Http\Controllers\Group\StoreController::class)->name('store');
+        ->group(static function (): void {
+            route::get('/create', \App\Http\Controllers\Group\CreateController::class)->name('create');
+            route::post('/', \App\Http\Controllers\Group\StoreController::class)->name('store');
 
-    });
+        });
 });
 
 require __DIR__.'/auth.php';

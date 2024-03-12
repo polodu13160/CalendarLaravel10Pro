@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Enum\RoleEnum;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -15,18 +14,18 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        foreach (RoleEnum::cases() as $roleEnum){
+        foreach (RoleEnum::cases() as $roleEnum) {
             Role::create([
-                'name'=>$roleEnum->value,
+                'name' => $roleEnum->value,
 
-                ]
+            ]
 
             );
         }
         Permission::create([
-            'name'=>'group.*'
+            'name' => 'group.*',
         ])->assignRole(
-            Role::firstWhere('name',RoleEnum::RESP_GROUP->value)
+            Role::firstWhere('name', RoleEnum::RESP_GROUP->value)
         );
     }
 }

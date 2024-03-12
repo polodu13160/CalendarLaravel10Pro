@@ -12,8 +12,9 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    protected $table='users';
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    protected $table = 'users';
+
+    use HasApiTokens, HasFactory, HasRoles, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -45,8 +46,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public function events():BelongsToMany
+
+    public function events(): BelongsToMany
     {
-        return $this->belongsToMany(Event::class);
+        return $this->belongsToMany(Event::class, 'event_user');
     }
 }

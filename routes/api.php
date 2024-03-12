@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->group(static function (): void {
-//    Route::get('events')->name('events');
-//    Route::put('subscribe')->name('subscribe');
+    Route::get('events', \App\Http\Controllers\Api\Event\IndexController::class)->name('events');
+    Route::put('subscribe', \App\Http\Controllers\Api\group\SubscribeController::class)->name('subscribe');
 });

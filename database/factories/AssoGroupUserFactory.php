@@ -5,14 +5,13 @@ namespace Database\Factories;
 use App\Models\Group;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use function Laravel\Prompts\select;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\AssoGroupUser>
  */
 class AssoGroupUserFactory extends Factory
 {
-    public int $x=1 ;
+    public int $x = 1;
     //car l'admin est en premier
 
     /**
@@ -28,18 +27,18 @@ class AssoGroupUserFactory extends Factory
 
         $userId = $this->selectUser($userIds);
 
-
         return [
 
-                'user_id' => $userId['id'],
-                'group_id' => $groupId['id'],
-                'Resp_Group' => $this->faker->boolean,
-
+            'user_id' => $userId['id'],
+            'group_id' => $groupId['id'],
+            'Resp_Group' => $this->faker->boolean,
 
         ];
     }
-    public function selectUser($userIds){
-        $userSelect=$userIds[$this->x];
+
+    public function selectUser($userIds)
+    {
+        $userSelect = $userIds[$this->x];
 
         $this->x++;
 

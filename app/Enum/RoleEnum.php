@@ -2,9 +2,9 @@
 
 namespace App\Enum;
 
-enum RoleEnum:string
+enum RoleEnum: string
 {
-    CASE ADMIN = 'Admin';
-    CASE RESP_GROUP = 'Responsable Groupe';
-    CASE USER='Utilisateur';
+    case ADMIN = 'Admin';
+    case RESP_GROUP = 'Responsable Groupe';
+    case USER = 'Utilisateur';
 }

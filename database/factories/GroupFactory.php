@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\EnumDev\GroupEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +16,6 @@ class GroupFactory extends Factory
      */
     public function definition(): array
     {
-
 
         return [
 

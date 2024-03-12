@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-
 class Group extends Model
 {
-    protected $table='groups';
+    protected $table = 'groups';
+
     use HasFactory;
 
     protected $fillable = [
@@ -17,7 +17,7 @@ class Group extends Model
 
     protected $casts = [
         'name' => 'string',
-        'description'=>'string',
+        'description' => 'string',
 
     ];
 }
