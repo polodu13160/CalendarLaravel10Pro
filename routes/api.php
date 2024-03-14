@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\Event\DropController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,5 +17,5 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->group(static function (): void {
     Route::get('events', \App\Http\Controllers\Api\Event\IndexController::class)->name('events');
     Route::put('subscribe', \App\Http\Controllers\Api\Event\SubscribeController::class)->name('subscribe');
-    Route::put('drop', \App\Http\Controllers\Api\Event\DropController::class)->name('drop');
+   
 });
