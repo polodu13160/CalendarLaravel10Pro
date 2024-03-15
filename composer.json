@@ -79,7 +79,9 @@
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "composer/installers": true,
+            "oomphinc/composer-installers-extender": true
         }
     },
     "minimum-stability": "stable",
