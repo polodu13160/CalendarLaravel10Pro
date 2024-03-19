@@ -1,6 +1,5 @@
-@extends('layouts.app')
+<x-app-layout>
 
-@section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -13,9 +12,8 @@
         </div>
     </div>
     <x-calendar.modal/>
-@endsection
 
-@push('scripts')
+
     <script>
 
         let calendar = null;
@@ -228,4 +226,5 @@
 
 
     </script>
-@endpush
+</x-app-layout>
+
