@@ -18,14 +18,16 @@ class EventController extends Controller
     public function index()
     {
         // $googleService = new GoogleService(auth()->user());
-//        dd($googleService->authUrl());
+        // dd($googleService->authUrl());
         return view('calendar');
     }
 
-    public function refetchEvents(Request $request) {
+    public function refetchEvents(Request $request)
+    {
 
         $eventService = new EventService(auth()->user());
         $eventsData = $eventService->allEvents($request->all());
+
         return response()->json($eventsData);
     }
 
@@ -48,12 +50,11 @@ class EventController extends Controller
         $event = $eventService->create($data);
         if ($event) {
             return response()->json([
-                'success' => true
+                'success' => true,
             ]);
-        }
-        else {
+        } else {
             return response()->json([
-                'success' => false
+                'success' => false,
             ]);
         }
     }
@@ -84,12 +85,11 @@ class EventController extends Controller
         $event = $eventService->update($id, $data);
         if ($event) {
             return response()->json([
-                'success' => true
+                'success' => true,
             ]);
-        }
-        else {
+        } else {
             return response()->json([
-                'success' => false
+                'success' => false,
             ]);
         }
     }
@@ -100,19 +100,20 @@ class EventController extends Controller
     public function destroy(Event $event)
     {
         try {
-//            if ($event->event_id) {
-//                $eventService = new EventService(auth()->user());
-//                $eventService->syncWithGoogle($event, true);
-//            }
+            //            if ($event->event_id) {
+            //                $eventService = new EventService(auth()->user());
+            //                $eventService->syncWithGoogle($event, true);
+            //            }
             $event->delete();
+
             return response()->json(['success' => true]);
-        }
-        catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             return response()->json(['success' => true]);
         }
     }
 
-    public function resizeEvent(Request $request, $id) {
+    public function resizeEvent(Request $request, $id)
+    {
 
         $data = $request->all();
         if (isset($data['is_all_day']) && $data['is_all_day'] == 1) {
@@ -122,12 +123,11 @@ class EventController extends Controller
         $event = $eventService->update($id, $data);
         if ($event) {
             return response()->json([
-                'success' => true
+                'success' => true,
             ]);
-        }
-        else {
+        } else {
             return response()->json([
-                'success' => false
+                'success' => false,
             ]);
         }
     }
