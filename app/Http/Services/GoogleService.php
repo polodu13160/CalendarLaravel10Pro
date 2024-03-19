@@ -1,47 +1,47 @@
 <?php
 
-namespace App\Http\Services;
+// namespace App\Http\Services;
 
-use App\Models\User;
-use Google\Service\OAuth2;
+// use App\Models\User;
+// use Google\Service\OAuth2;
 
-class GoogleService
-{
-    protected $user;
+// class GoogleService
+// {
+//     protected $user;
 
-    protected $client;
+//     protected $client;
 
-    public function __construct(User $user)
-    {
-        $this->client = $this->googleClientConfig();
-        $this->user = $user;
-    }
+//     public function __construct(User $user)
+//     {
+//         $this->client = $this->googleClientConfig();
+//         $this->user = $user;
+//     }
 
-    private function googleClientConfig()
-    {
-        $redirectURL = 'user.integration.authorize_google_calendar';
-        $all_scopes = implode(' ', [
-            \Google_Service_Calendar::CALENDAR,
-            OAuth2::USERINFO_PROFILE,
-            OAuth2::USERINFO_EMAIL,
-        ]);
-        $client = new \Google_Client();
-        $client->setApplicationName('Events');
-        $client->setScopes($all_scopes);
-        // $client->setAuthConfig(storage_path('app/googleClient/client_secret.json'));
-        $client->setState('gcalendar');
-        $client->setRedirectUri(route($redirectURL));
-        $client->setAccessType('offline');
-        $client->setApprovalPrompt('force');
+//     private function googleClientConfig()
+//     {
+//         $redirectURL = 'user.integration.authorize_google_calendar';
+//         $all_scopes = implode(' ', [
+//             \Google_Service_Calendar::CALENDAR,
+//             OAuth2::USERINFO_PROFILE,
+//             OAuth2::USERINFO_EMAIL,
+//         ]);
+//         $client = new \Google_Client();
+//         $client->setApplicationName('Events');
+//         $client->setScopes($all_scopes);
+//         // $client->setAuthConfig(storage_path('app/googleClient/client_secret.json'));
+//         $client->setState('gcalendar');
+//         $client->setRedirectUri(route($redirectURL));
+//         $client->setAccessType('offline');
+//         $client->setApprovalPrompt('force');
 
-        return $client;
-    }
+//         return $client;
+//     }
 
-    public function authUrl()
-    {
+//     public function authUrl()
+//     {
 
-        $client = $this->client;
+//         $client = $this->client;
 
-        return $client->createAuthUrl();
-    }
-}
+//         return $client->createAuthUrl();
+//     }
+// }
