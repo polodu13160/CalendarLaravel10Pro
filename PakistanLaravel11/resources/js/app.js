@@ -6,6 +6,8 @@ window.Alpine = Alpine;
 
 Alpine.start();
 
+//SEE https://github.com/alpinejs/alpine/pull/2063
+// Permet la compatibilité entre JQuery et Alpine
 document.addEventListener("alpine:init", () => {
     Alpine.setListenerManipulators(
         (target, event, handler, options, modifiers) => {
@@ -16,3 +18,8 @@ document.addEventListener("alpine:init", () => {
         }
     );
 });
+
+/* EXAMPLE: 
+    <span @click="val='new'" x-text="val"></span>
+    <button onclick="$('span').trigger('click')">Update</button>
+*/    
